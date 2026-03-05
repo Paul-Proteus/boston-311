@@ -89,3 +89,28 @@ body {
   text-transform: uppercase;
   margin-top: 0.25rem;
 }
+
+.map-container {
+  height: 400px;
+  border-radius: 8px;
+  z-index: 1;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.dashboard-left {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.dashboard-right {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}

@@ -2,6 +2,7 @@ import { useState, useEffect, useMemo } from 'react'
 import { loadData } from './utils/dataLoader'
 import FilterBar from './components/FilterBar'
 import StatsCards from './components/StatsCards'
+import MapView from './components/MapView'
 
 function App() {
   const [data, setData] = useState([])
@@ -90,7 +91,14 @@ function App() {
           types={types}
           dateRange={dateRange}
         />
-        <StatsCards data={filteredData} />
+        <div className="dashboard-grid">
+          <div className="dashboard-left">
+            <MapView data={filteredData} />
+          </div>
+          <div className="dashboard-right">
+            <StatsCards data={filteredData} />
+          </div>
+        </div>
       </main>
     </div>
   )
