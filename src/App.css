@@ -30,6 +30,14 @@ body {
   margin: 0 auto;
 }
 
+.load-error {
+  color: #c53030;
+  background: #fff5f5;
+  padding: 1rem;
+  border-radius: 8px;
+  border: 1px solid #feb2b2;
+}
+
 .filter-bar {
   display: flex;
   gap: 1rem;
@@ -38,6 +46,8 @@ body {
   border-radius: 8px;
   margin-bottom: 1rem;
   flex-wrap: wrap;
+  position: relative;
+  z-index: 1000;
 }
 
 .filter-group {

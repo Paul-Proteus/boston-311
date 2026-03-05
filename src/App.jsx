@@ -9,6 +9,7 @@ import CategoryCharts from './components/CategoryCharts'
 function App() {
   const [data, setData] = useState([])
   const [loading, setLoading] = useState(true)
+  const [loadError, setLoadError] = useState(null)
   const [filters, setFilters] = useState({
     startDate: '',
     endDate: '',
@@ -17,9 +18,28 @@ function App() {
     status: '',
   })
 
+  const toLocalDateString = (d) =>
+    `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`
+
   useEffect(() => {
-    loadData('/2026-311-data.csv')
-      .then(setData)
+    setLoadError(null)
+    loadData()
+      .then((rows) => {
+        setData(rows)
+        const withDates = rows.filter(r => r.openDate)
+        if (withDates.length > 0) {
+          const minD = withDates.reduce((m, r) => (!m || r.openDate < m ? r.openDate : m), null)
+          const maxD = withDates.reduce((m, r) => (!m || r.openDate > m ? r.openDate : m), null)
+          if (minD && maxD) {
+            setFilters(f => ({
+              ...f,
+              startDate: toLocalDateString(minD),
+              endDate: toLocalDateString(maxD),
+            }))
+          }
+        }
+      })
+      .catch((err) => setLoadError(err.message || 'Failed to load data'))
       .finally(() => setLoading(false))
   }, [])
 
@@ -49,12 +69,14 @@ function App() {
   }, [data])
 
   const filteredData = useMemo(() => {
+    const startOfStart = filters.startDate ? new Date(filters.startDate + 'T00:00:00') : null
+    const endOfEnd = filters.endDate ? new Date(filters.endDate + 'T23:59:59.999') : null
     return data.filter(row => {
-      if (filters.startDate && row.openDate) {
-        if (row.openDate < new Date(filters.startDate)) return false
+      if (startOfStart && row.openDate) {
+        if (row.openDate < startOfStart) return false
       }
-      if (filters.endDate && row.openDate) {
-        if (row.openDate > new Date(filters.endDate + 'T23:59:59')) return false
+      if (endOfEnd && row.openDate) {
+        if (row.openDate > endOfEnd) return false
       }
       if (filters.neighborhood && row.neighborhood !== filters.neighborhood) return false
       if (filters.type && row.type !== filters.type) return false
@@ -75,6 +97,19 @@ function App() {
         </header>
         <main className="main">
           <p>Loading data...</p>
+        </main>
+      </div>
+    )
+  }
+
+  if (loadError) {
+    return (
+      <div className="app">
+        <header className="header">
+          <h1>Boston 311 Dashboard</h1>
+        </header>
+        <main className="main">
+          <p className="load-error">{loadError}</p>
         </main>
       </div>
     )

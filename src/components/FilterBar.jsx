@@ -12,8 +12,7 @@ function FilterBar({
         <input
           type="date"
           value={filters.startDate}
-          min={dateRange.min}
-          max={dateRange.max}
+          max={filters.endDate || undefined}
           onChange={(e) => onFilterChange('startDate', e.target.value)}
         />
       </div>
@@ -23,8 +22,7 @@ function FilterBar({
         <input
           type="date"
           value={filters.endDate}
-          min={dateRange.min}
-          max={dateRange.max}
+          min={filters.startDate || undefined}
           onChange={(e) => onFilterChange('endDate', e.target.value)}
         />
       </div>
