@@ -2,6 +2,9 @@
 
 A React dashboard for exploring Boston 311 service requests: map, filters, and charts.
 
+<img width="1500" height="753" alt="image" src="https://github.com/user-attachments/assets/543c9c73-5a17-4c03-ae7b-c67839dd26da" />
+
+
 ## Prerequisites
 
 - **Node.js** 18+ and npm
