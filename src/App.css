@@ -26,6 +26,8 @@ body {
 
 .main {
   padding: 1rem;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
 .filter-bar {
@@ -131,4 +133,20 @@ body {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
+}
+
+@media (max-width: 1200px) {
+  .category-charts {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 800px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .filter-bar {
+    flex-direction: column;
+  }
 }
