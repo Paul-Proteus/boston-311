@@ -1,6 +1,7 @@
 import { useState, useEffect, useMemo } from 'react'
 import { loadData } from './utils/dataLoader'
 import FilterBar from './components/FilterBar'
+import StatsCards from './components/StatsCards'
 
 function App() {
   const [data, setData] = useState([])
@@ -89,7 +90,7 @@ function App() {
           types={types}
           dateRange={dateRange}
         />
-        <p>Showing {filteredData.length} of {data.length} requests</p>
+        <StatsCards data={filteredData} />
       </main>
     </div>
   )
