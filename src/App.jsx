@@ -4,6 +4,7 @@ import FilterBar from './components/FilterBar'
 import StatsCards from './components/StatsCards'
 import TimeChart from './components/TimeChart'
 import MapView from './components/MapView'
+import CategoryCharts from './components/CategoryCharts'
 
 function App() {
   const [data, setData] = useState([])
@@ -101,6 +102,7 @@ function App() {
             <TimeChart data={filteredData} />
           </div>
         </div>
+        <CategoryCharts data={filteredData} />
       </main>
     </div>
   )
