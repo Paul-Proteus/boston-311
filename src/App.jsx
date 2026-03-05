@@ -2,6 +2,7 @@ import { useState, useEffect, useMemo } from 'react'
 import { loadData } from './utils/dataLoader'
 import FilterBar from './components/FilterBar'
 import StatsCards from './components/StatsCards'
+import TimeChart from './components/TimeChart'
 import MapView from './components/MapView'
 
 function App() {
@@ -97,6 +98,7 @@ function App() {
           </div>
           <div className="dashboard-right">
             <StatsCards data={filteredData} />
+            <TimeChart data={filteredData} />
           </div>
         </div>
       </main>
